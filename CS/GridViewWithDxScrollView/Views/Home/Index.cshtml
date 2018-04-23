@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "dxScrollView in GridView";
+}
+
+<h2>How to use the dxScrollView widget instead of default browser scrollbars</h2>
+<blockquote cite="https://isc.devexpress.com/Thread/WorkplaceDetails/T532374">
+    This example demonstrates how to use the dxScrollView HTML5/JS widget to substitute the default browser scrollbars.
+    <br />
+    You can change the dxScrollView widget's settings using the "dxScrollView settings" form.
+    <ul>
+        <li>
+            <strong>Scroll by Content.</strong>
+            <ul>
+                <li>
+                    Checked - you can scroll the view by dragging the content area.
+                </li>
+                <li>
+                    Unchecked - scrolling is possible only by dragging scrollbars.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>Scrollbar mode.</strong>
+            <ul>
+                <li>
+                    On Scroll - scrollbars will be visible only if you scroll the content area.
+                </li>
+                <li>
+                    On Hover - scrollbars will be visible if you hover the mouse pointer over the content area.
+                </li>
+                <li>
+                    Always - scorllbars will always be visible.
+                </li>
+                <li>
+                    Never - scrollbars are never visible (scrolling is still possible).
+                </li>
+            </ul>
+        </li>
+    </ul>
+</blockquote>
+
+@Html.DevExpress().FormLayout(settings => {
+    settings.Name = "ScrollViewSettings";
+    settings.Items.AddGroupItem(group => {
+        group.Name = "SettingsGroup";
+        group.Caption = "dxScrollView settings";
+
+        group.Items.Add(item => {
+            item.Name = "IsScrollByContent";
+            item.Caption = "Scroll by Content";
+            item.NestedExtension().CheckBox(chbSettings => {
+                chbSettings.Checked = false;
+                chbSettings.Properties.ClientSideEvents.CheckedChanged = "OnScrollByContentCheckedChanged";
+            });
+        });
+
+        group.Items.Add(item => {
+            item.Name = "ShowScrollBar";
+            item.Caption = "Scrollbar mode";
+            item.NestedExtension().ComboBox(cbSettings => {
+                cbSettings.Properties.Items.Add("On Scroll", "onScroll");
+                cbSettings.Properties.Items.Add("On Hover", "onHover");
+                cbSettings.Properties.Items.Add("Always", "always");
+                cbSettings.Properties.Items.Add("Never", "never");
+
+                cbSettings.SelectedIndex = 0;
+                cbSettings.Properties.ClientSideEvents.SelectedIndexChanged = "OnScrollbarModeCheckedChanged";
+            });
+        });
+    });
+}).GetHtml()
+
+@Html.Action("GridViewPartial")

@@ -1,0 +1,31 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPartial" };
+
+
+        settings.KeyFieldName = "ID";
+
+        settings.Width = 400;
+
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 200;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+
+        settings.SettingsPager.Visible = false;
+
+        settings.Columns.Add("ID").Width = 200;
+        settings.Columns.Add("Text").Width = 100;
+        settings.Columns.Add("Description").Width = 200;
+        settings.Columns.Add(col => {
+            col.FieldName = "Price";
+            col.PropertiesEdit.DisplayFormatString = "C";
+        });
+
+        settings.ClientSideEvents.Init = "OnGridViewInit";
+        settings.ClientSideEvents.EndCallback = "OnGridViewEndCallback";
+
+    });
+}
+@grid.Bind(Model).GetHtml()
