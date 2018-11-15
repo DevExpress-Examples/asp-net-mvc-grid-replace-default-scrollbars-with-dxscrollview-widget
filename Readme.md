@@ -1,3 +1,11 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [scripts.js](./CS/GridViewWithDxScrollView/Scripts/scripts.js) (VB: [scripts.js](./VB/GridViewWithDxScrollView/Scripts/scripts.js))
+* [_GridViewPartial.cshtml](./CS/GridViewWithDxScrollView/Views/Home/_GridViewPartial.cshtml)
+* **[Index.cshtml](./CS/GridViewWithDxScrollView/Views/Home/Index.cshtml)**
+* [_Layout.cshtml](./CS/GridViewWithDxScrollView/Views/Shared/_Layout.cshtml)
+<!-- default file list end -->
 # GridView - How to use the dxScrollView widget instead of default browser scrollbars
 
 
