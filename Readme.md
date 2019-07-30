@@ -8,7 +8,7 @@
 <!-- default file list end -->
 # GridView - How to use the dxScrollView widget instead of default browser scrollbars
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/t532374)**
+**[[Run Online]](https://codecentral.devexpress.com/t532374/)**
 <!-- run online end -->
 
 
