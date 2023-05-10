@@ -1,40 +1,66 @@
-<!-- default badges list -->
-![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128550923/15.2.4%2B)
-[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T532374)
-[![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
-<!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
-
-* [scripts.js](./CS/GridViewWithDxScrollView/Scripts/scripts.js) (VB: [scripts.js](./VB/GridViewWithDxScrollView/Scripts/scripts.js))
-* [_GridViewPartial.cshtml](./CS/GridViewWithDxScrollView/Views/Home/_GridViewPartial.cshtml)
-* **[Index.cshtml](./CS/GridViewWithDxScrollView/Views/Home/Index.cshtml)**
-* [_Layout.cshtml](./CS/GridViewWithDxScrollView/Views/Shared/_Layout.cshtml)
-<!-- default file list end -->
-# GridView - How to use the dxScrollView widget instead of default browser scrollbars
+# Grid View for ASP.NET MVC - How to replace default browser scrollbars with the dxScrollView widget
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/t532374/)**
 <!-- run online end -->
 
+This example demonstrates how to apply the **dxScrollView** widget to the grid to configure the grid's scrolling capability.
 
-<p>This example demonstrates how to use the dxScrollView HTML5/JS widget to substitute the default browser scrollbars. To be able to apply the dxScrollView widget to GridView's scrollable element, enable vertical and horizontal scrolling by setting the GridViewSettings.Settings.<a href="https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.HorizontalScrollBarMode.property">HorizontalScrollBarMode</a> and GridViewSettings.Settings.<a href="https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.VerticalScrollBarMode.property">VerticalScrollBarMode</a> properties to <a href="https://documentation.devexpress.com/AspNet/DevExpressWebScrollBarModeEnumtopic.aspx">ScrollBarMode</a>.Auto. Make sure that you also specify the GridViewSettings.Settings.<a href="https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.VerticalScrollableHeight.property">VerticalScrollableHeight</a> property to see a vertical scrollbar.<br><br>The dxScrollView widget should be applied to the GridView extension on the first load of the grid and after each callback. Apply the dxScrollWidget to the 'dxgvCSD' element:</p>
+![dxScrollWidget](dxScrollViewWidget.png)
 
+## Overview
 
-```js
-GetScrollableElement().dxScrollView({
-    showScrollbar: 'always',
-    direction: 'both',
-    scrollByContent: IsScrollByContent.GetChecked(),
-    showScrollbar: ShowScrollBar.GetValue(),
-    onScroll: function (e) {
-        $('.dxgvHSDC .dxgvTable_DevEx').css('transform', 'translateX(' + (-e.scrollOffset.left) + 'px)');
-    }
+Set the grid's [HorizontalScrollBarMode](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.HorizontalScrollBarMode) and [VerticalScrollBarMode](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.VerticalScrollBarMode) properties to `Auto` to enable horizontal and vertical scrolling. To display a vertical scrollbar, specify the grid's [VerticalScrollableHeight](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridSettings.VerticalScrollableHeight) property.
+
+```cshtml
+var grid = Html.DevExpress().GridView(settings => {
+    <!-- ... -->
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.VerticalScrollableHeight = 200;
+    <!-- ... -->
 });
 ```
 
+Apply the **dxScrollView** widget to the `dxgvCSD` element on the first grid load and after a callback:
 
-<p>Note that you need to move the header element using the code from the onScroll method.</p>
+```js
+unction InitializeScrollView() {
+    GetScrollableElement().dxScrollView({
+        showScrollbar: 'always',
+        direction: 'both',
+        scrollByContent: IsScrollByContent.GetChecked(),
+        showScrollbar: ShowScrollBar.GetValue(),
+        onScroll: function (e) {
+            $('.dxgvHSDC .dxgvTable_DevEx').css('transform', 'translateX(' + (-e.scrollOffset.left) + 'px)');
+        }
+    });
+    AdjustHeaderElement();
+}
 
-<br/>
+function GetScrollableElement() {
+    return $('.dxgvCSD', GridView.GetMainElement());
+}
+function AdjustHeaderElement() {
+    $('.dxgvHSDC')[0].style.paddingRight = '';
+    var headerScrollElement = $('.dxgvHSDC > div')[0];
+    headerScrollElement.style.width = (GridView.GetMainElement().offsetWidth - 2) + 'px';
+}
 
+function OnGridViewInit(s, e) {
+    InitializeScrollView();
+}
 
+function OnGridViewEndCallback(s, e) {
+    InitializeScrollView();
+}
+```
+
+## Files to Review
+
+* [scripts.js](./CS/GridViewWithDxScrollView/Scripts/scripts.js) (VB: [scripts.js](./VB/GridViewWithDxScrollView/Scripts/scripts.js))
+* [_GridViewPartial.cshtml](./CS/GridViewWithDxScrollView/Views/Home/_GridViewPartial.cshtml)
+
+## Documentation
+
+* [Vertical Scrolling](https://docs.devexpress.com/AspNetMvc/16903/components/grid-view/focus-and-navigation/paging-and-scrolling/vertical-scrolling)
+* [Horizontal Scrolling](https://docs.devexpress.com/AspNetMvc/16905/components/grid-view/focus-and-navigation/paging-and-scrolling/horizontal-scrolling)
