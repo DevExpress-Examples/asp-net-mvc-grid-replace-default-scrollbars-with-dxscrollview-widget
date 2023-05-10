@@ -3,7 +3,7 @@
 **[[Run Online]](https://codecentral.devexpress.com/t532374/)**
 <!-- run online end -->
 
-This example demonstrates how to apply the **dxScrollView** widget to the grid to configure the grid's scroll functionality.
+This example demonstrates how to apply the **dxScrollView** widget to the grid to configure the grid's scrolling capability.
 
 ![dxScrollWidget](dxScrollViewWidget.png)
 
