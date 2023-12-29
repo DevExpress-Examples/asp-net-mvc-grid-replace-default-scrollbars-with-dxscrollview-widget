@@ -4,9 +4,6 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 # Grid View for ASP.NET MVC - How to replace default browser scrollbars with the dxScrollView widget
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128550923/)**
-<!-- run online end -->
 
 This example demonstrates how to apply the **dxScrollView** widget to the grid to configure the grid's scrolling capability.
 
