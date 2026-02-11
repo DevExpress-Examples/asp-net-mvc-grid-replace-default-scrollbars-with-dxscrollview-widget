@@ -68,7 +68,7 @@ function OnGridViewEndCallback(s, e) {
 * [Vertical Scrolling](https://docs.devexpress.com/AspNetMvc/16903/components/grid-view/focus-and-navigation/paging-and-scrolling/vertical-scrolling)
 * [Horizontal Scrolling](https://docs.devexpress.com/AspNetMvc/16905/components/grid-view/focus-and-navigation/paging-and-scrolling/horizontal-scrolling)
 <!-- feedback -->
-## Does This Example Address Your Development Requirements/Objectives?
+## Does this example address your development requirements/objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=asp-net-mvc-grid-replace-default-scrollbars-with-dxscrollview-widget&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=asp-net-mvc-grid-replace-default-scrollbars-with-dxscrollview-widget&~~~was_helpful=no)
 
